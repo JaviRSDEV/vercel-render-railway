@@ -17,26 +17,24 @@ Este proyecto utiliza:
 
 En este proyecto usaremos **Vercel** para el despliegue del frontend (Vue 3) y **Render** para el despliegue del backend (FastAPI).
 
----
+<!-- --- -->
 
 ## Índice
 
 1. [Estructura del Proyecto](#1-estructura-del-proyecto)
-2. [Desarrollo Local con Docker](#2-desarrollo-local-con-docker)
+2. [Desarrollo local con Docker](#2-desarrollo-local-con-docker)
 3. [Estructura del Frontend](#3-estructura-del-frontend)
 4. [Estructura del Backend](#4-estructura-del-backend)
 5. [Guía de Despliegue (CI/CD)](#5-guía-de-despliegue-cicd)
    - [Despliegue del Backend (Render)](#a-despliegue-del-backend-render)
    - [Despliegue del Frontend (Vercel)](#b-despliegue-del-frontend-vercel)
-6. [Conceptos Clave](#6-conceptos-clave)
-7. [Tecnologías Utilizadas](#7-tecnologías-utilizadas)
-8. [Comandos Útiles](#8-comandos-útiles)
-9. [Próximos Pasos](#9-próximos-pasos)
-10. [Licencia](#licencia)
-9. [Próximos Pasos](#8-próximos-pasos)
+6. [Conceptos clave](#6-conceptos-clave)
+7. [Tecnologías utilizadas](#7-tecnologías-utilizadas)
+8. [Comandos útiles durante el desarrollo](#8-comandos-útiles-durante-el-desarrollo)
+9. [Próximos pasos](#9-próximos-pasos)
 10. [Licencia](#licencia)
 
----
+<!-- --- -->
 
 ## 1. Estructura del Proyecto
 
@@ -66,7 +64,7 @@ El repositorio está organizado siguiendo el patrón de monorepositorio sencillo
 └── README.md               # Esta documentación
 ```
 
----
+<!-- --- -->
 
 ## 2. Desarrollo Local con Docker
 
@@ -88,7 +86,7 @@ Para asegurar que todos los desarrolladores trabajen en el mismo entorno, utiliz
    - **Backend API:** [http://localhost:8000](http://localhost:8000)
    - **Documentación Interactiva (Swagger):** [http://localhost:8000/docs](http://localhost:8000/docs)
 
----
+<!-- --- -->
 
 ## 3. Estructura del Frontend
 
@@ -121,7 +119,7 @@ VITE_API_URL=http://localhost:8000
 VITE_API_URL=https://tu-api.onrender.com
 ```
 
----
+<!-- --- -->
 
 ## 4. Estructura del Backend
 
@@ -145,7 +143,7 @@ app.add_middleware(
 )
 ```
 
----
+<!-- --- -->
 
 ## 5. Guía de Despliegue (CI/CD)
 
@@ -189,7 +187,7 @@ El objetivo es que cada vez que hagas un `git push` a la rama `main`, la aplicac
 - Verás los workflows ejecutándose y llamando al Deploy Hook de Render.
 - En Render Dashboard, verás nuevos despliegues iniciándose automáticamente.
 
----
+<!-- --- -->
 
 ### B. Despliegue del Frontend (Vercel)
 
@@ -240,9 +238,9 @@ El objetivo es que cada vez que hagas un `git push` a la rama `main`, la aplicac
 - Verás el workflow `Deploy Frontend to Vercel` ejecutándose
 - En Vercel Dashboard, verás nuevos despliegues iniciándose automáticamente
 
----
+<!-- --- -->
 
-## 6. Conceptos Clave
+## 6. Conceptos clave
 
 ### Docker Multi-stage
 
@@ -273,9 +271,9 @@ Nunca subas contraseñas, tokens o claves al repositorio. Usa siempre:
 - GitHub Secrets (Settings > Secrets and variables)
 - Variables de entorno en plataformas de despliegue (Vercel, Render)
 
----
+<!-- --- -->
 
-## 7. Tecnologías Utilizadas
+## 7. Tecnologías utilizadas
 
 | Componente | Tecnología | Versión |
 |-----------|-----------|---------|
@@ -287,9 +285,9 @@ Nunca subas contraseñas, tokens o claves al repositorio. Usa siempre:
 | **Servidor Docker** | Node.js | 20-slim |
 | **Base de Datos** | - | (Puede agregarse) |
 
----
+<!-- --- -->
 
-## 8. Comandos Útiles
+## 8. Comandos útiles durante el desarrollo
 
 ```bash
 # Desarrollo local
@@ -308,9 +306,9 @@ docker compose logs -f frontend
 docker compose exec frontend npm install
 ```
 
----
+<!-- --- -->
 
-## 9. Próximos Pasos
+## 9. Próximos pasos
 
 - [ ] Agregar autenticación con JWT
 - [ ] Implementar base de datos (PostgreSQL)
@@ -319,8 +317,8 @@ docker compose exec frontend npm install
 - [ ] Configurar monitoring y logging
 - [ ] Documentar APIs con OpenAPI/Swagger
 
----
+<!-- --- -->
 
-## Licencia
+## 10. Licencia
 
 Este proyecto es de código abierto y está disponible bajo la licencia MIT.
