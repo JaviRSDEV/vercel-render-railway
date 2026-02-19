@@ -221,6 +221,8 @@ El objetivo es que cada vez que hagas un `git push` a la rama `main`, la aplicac
 
 Con `DATABASE_URL` definido, el backend usará esa base de datos en producción. En local, seguirá usando las variables `DB_*` de `compose.yaml`.
 
+> Nota: si Railway te entrega la URL con `mysql://`, el backend la normaliza automáticamente a `mysql+pymysql://`.
+
 <!-- --- -->
 
 ### B. Despliegue del Frontend (Vercel)
@@ -347,8 +349,6 @@ docker compose exec frontend npm install
 ## 9. Próximos pasos
 
 - [ ] Agregar autenticación con JWT
-- [ ] Implementar base de datos (PostgreSQL)
-- [ ] Crear modelos de datos más complejos
 - [ ] Escribir tests (pytest para backend, Vitest para frontend)
 - [ ] Configurar monitoring y logging
 - [ ] Documentar APIs con OpenAPI/Swagger

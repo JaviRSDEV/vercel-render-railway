@@ -44,6 +44,8 @@ class ItemOut(BaseModel):
 def build_database_url() -> str:
     database_url = os.getenv("DATABASE_URL")
     if database_url:
+        if database_url.startswith("mysql://"):
+            return database_url.replace("mysql://", "mysql+pymysql://", 1)
         return database_url
 
     def require_env(name: str) -> str:
