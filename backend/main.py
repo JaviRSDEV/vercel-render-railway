@@ -5,6 +5,11 @@ from sqlalchemy import create_engine, Integer, String, select
 from sqlalchemy.orm import declarative_base, sessionmaker, Mapped, mapped_column, Session
 from typing import Generator, Literal
 import os
+import time
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="API de Demostración Didáctica",
@@ -99,9 +104,26 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup() -> None:
-    Base.metadata.create_all(bind=engine)
-    with SessionLocal() as session:
-        seed_data(session)
+    max_retries = 10
+    retry_interval = 5  # segundos
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            logger.info(f"Intento {attempt}/{max_retries}: Conectando a la base de datos...")
+            Base.metadata.create_all(bind=engine)
+            with SessionLocal() as session:
+                # Verificar conexión
+                session.execute(select(1))
+                seed_data(session)
+            logger.info("✓ Conexión a la base de datos exitosa")
+            break
+        except Exception as e:
+            logger.warning(f"✗ Error al conectar (intento {attempt}/{max_retries}): {e}")
+            if attempt == max_retries:
+                logger.error("No se pudo conectar a la base de datos después de múltiples intentos")
+                raise
+            logger.info(f"Reintentando en {retry_interval} segundos...")
+            time.sleep(retry_interval)
 
 @app.get("/")
 async def root():
