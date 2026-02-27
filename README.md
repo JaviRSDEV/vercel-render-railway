@@ -6,6 +6,9 @@
 Comprobamos que podemos acceder a la API tras desplegarlo
 ![imagen](images/backend_funciona_despl.jpg)
 
+Tambien comprobamos que podemos acceder a su documentación
+![imagen](images/documentacion_desplegada.jpg)
+
 * **Tras esto también tendremos que crear la base de datos mysql en railway, una vez creada añadiremos el enlace de la misma como una variable de entorno dentro de render**
 ![imagen](images/BD_railway.jpg)
 
