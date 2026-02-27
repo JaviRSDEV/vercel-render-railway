@@ -1,4 +1,4 @@
-# Despliegue en Vercel, Render y Railway
+# Despliegue en Vercel, Render y Railwa
 
 Este repositorio es una guía práctica para aprender a estructurar, dockerizar y desplegar una aplicación web siguiendo los principios de **CI/CD** con **GitHub Actions**, **Vercel**, **Render** y **Railway**.
 
