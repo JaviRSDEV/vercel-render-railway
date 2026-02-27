@@ -21,17 +21,19 @@ jobs:
         run: |
           cd backend
           pip install -r requirements.txt
-          pip install pytest httpx  # Herramientas necesarias para el test
+          pip install pytest httpx python-multipart jose passlib[bcrypt]
 
       - name: Run Tests
         run: |
           cd backend
-          # Definimos una SECRET_KEY de prueba para que no falle el test
-          export SECRET_KEY=test_key_environment
-          pytest
+          # Variables de entorno necesarias para el entorno de test
+          export SECRET_KEY=test_key_ci_cd
+          export DATABASE_URL=sqlite:///./test.db
+          # Usar python -m pytest resuelve el problema de los imports
+          python -m pytest -v
 
       - name: Trigger Render Deploy Hook
-        # Este paso solo se ejecuta si los anteriores (incluyendo pytest) tuvieron éxito
         if: success()
         run: |
+          # Solo se dispara si el paso anterior (pytest) devuelve código de salida 0
           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

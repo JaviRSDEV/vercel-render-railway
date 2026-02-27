@@ -10,7 +10,6 @@ def test_read_root():
     assert response.json()["status"] == "online"
 
 def test_items_protected():
-    """Verifica que no se pueden ver items sin token"""
     response = client.get("/api/items")
     assert response.status_code == 401  # Unauthorized
 
