@@ -7,7 +7,44 @@ const api = axios.create({
   timeout: 10000,
 })
 
+// --- INTERCEPTOR DE SEGURIDAD ---
+// Este bloque es vital: antes de cada petición, revisa si hay un token y lo pega
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
 export const apiService = {
+  // --- NUEVA FUNCIÓN: REGISTRO ---
+  async register(payload: { username: string; password: str }) {
+    try {
+      const response = await api.post('/api/auth/register', payload)
+      return response.data
+    } catch (error) {
+      console.error('Error en registro:', error)
+      throw error
+    }
+  },
+
+  // --- NUEVA FUNCIÓN: LOGIN ---
+  async login(username: string, password: str) {
+    try {
+      // FastAPI espera OAuth2PasswordRequestForm (form-data), no JSON
+      const formData = new FormData()
+      formData.append('username', username)
+      formData.append('password', password)
+      
+      const response = await api.post('/token', formData)
+      return response.data // Devuelve { access_token: "...", token_type: "bearer" }
+    } catch (error) {
+      console.error('Error en login:', error)
+      throw error
+    }
+  },
+
   async getStatus() {
     try {
       const response = await api.get('/')
