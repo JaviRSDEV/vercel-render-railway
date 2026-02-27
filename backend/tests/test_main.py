@@ -11,7 +11,7 @@ def test_read_root():
 
 def test_items_protected():
     response = client.get("/api/items")
-    assert response.status_code == 401  # Unauthorized
+    assert response.status_code == 401
 
 def test_full_auth_flow():
     """Test de Registro -> Login -> Acceso Protegido"""

@@ -21,7 +21,8 @@ jobs:
         run: |
           cd backend
           pip install -r requirements.txt
-          pip install pytest httpx python-multipart jose passlib[bcrypt]
+          # AQUÍ ESTÁ EL FIX: Forzamos la versión de httpx y entrecomillamos passlib
+          pip install pytest "httpx<0.28.0" python-multipart jose "passlib[bcrypt]"
 
       - name: Run Tests
         run: |
