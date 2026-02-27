@@ -7,12 +7,31 @@ on:
       - 'backend/**'
 
 jobs:
-  deploy:
+  test-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      - name: Trigger Render Deploy Hook
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
         run: |
-          # El usuario debe configurar RENDER_DEPLOY_HOOK en GitHub Secrets
+          cd backend
+          pip install -r requirements.txt
+          pip install pytest httpx  # Herramientas necesarias para el test
+
+      - name: Run Tests
+        run: |
+          cd backend
+          # Definimos una SECRET_KEY de prueba para que no falle el test
+          export SECRET_KEY=test_key_environment
+          pytest
+
+      - name: Trigger Render Deploy Hook
+        # Este paso solo se ejecuta si los anteriores (incluyendo pytest) tuvieron éxito
+        if: success()
+        run: |
           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
