@@ -24,7 +24,7 @@ export const apiService = {
       const response = await api.post('/api/auth/register', payload)
       return response.data
     } catch (error) {
-      console.error('Error en registro:', error)
+      console.error('Error en registro, este es el error:', error)
       throw error
     }
   },
